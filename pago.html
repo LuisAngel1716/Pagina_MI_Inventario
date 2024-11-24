@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo de Pago</title>
+    <link rel="webside icon" type="png" href="logo1.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        #Pagina_pago {
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+            margin: 2rem 0;
+        }
+
+        .pago-container {
+            position: relative;
+            display: grid;
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .pago-container h2 {
+            font-size: 1.2rem;
+            color: #0078D4;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .payment-options {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            width: 60%;
+            margin-right: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-options h2 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .payment-option:hover {
+            background-color: #f0f8ff;
+            border-color: #007bff;
+        }
+
+        .payment-option input {
+            display: none;
+        }
+
+        .payment-option label {
+            width: 100%;
+            margin: 0;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payment-option input:checked + label {
+            background-color: #e6f3ff;
+            border: 1px solid #007bff;
+            border-radius: 8px;
+        }
+
+        .summary {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            width: 30%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary h2 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .summary p {
+            margin: 10px 0;
+        }
+
+        .summary .total {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .continue-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .continue-button:hover {
+            background-color: #0056b3;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <section id="Pagina_pago">
+        <div class="pago-container">
+            
+            <div class="container">
+                <div class="payment-options">
+                    <h2>Elige cómo pagar</h2>
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="credit-card" />
+                        <label for="credit-card">
+                            <span>Nueva tarjeta de crédito</span>
+                        </label>
+                    </div>
+
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="new-debit" />
+                        <label for="new-debit">
+                            <span>Nueva tarjeta de débito</span>
+                        </label>
+                    </div>
+
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="transfer" />
+                        <label for="transfer">
+                            <span>PayPal</span>
+                        </label>
+                    </div>
+
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="cash" />
+                        <label for="cash">
+                            <span>Efectivo en puntos de pago</span>
+                        </label>
+                    </div>
+
+                    <p class="note">Aprobación instantánea desde cualquier banco en línea.</p>
+                </div>
+
+                <!-- Summary Section -->
+                <div class="summary">
+                    <h2>Resumen de compra</h2>
+                    <p>Paquete: <span id="nombre-paquete">---</span></p>
+                    <p>Precio: <span id="precio-paquete">---</span></p>
+                    <p class="total">Total: <span id="total-precio">---</span></p>
+
+                    <button id="continue-button" class="continue-button">Continuar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Obtener parámetros de la URL
+        const params = new URLSearchParams(window.location.search);
+        const nombre = params.get('nombre');
+        const precio = params.get('precio');
+
+        // Actualizar los valores en la página
+        document.getElementById('nombre-paquete').textContent = nombre || 'No especificado';
+        document.getElementById('precio-paquete').textContent = `$${precio || '0'}`;
+        document.getElementById('total-precio').textContent = `$${precio || '0'}`;
+
+        // Redirigir dependiendo de la opción seleccionada
+        document.getElementById('continue-button').addEventListener('click', () => {
+            const selectedPayment = document.querySelector('input[name="payment"]:checked');
+
+            if (selectedPayment) {
+                let targetPage = ''; // Página de destino
+                switch (selectedPayment.id) {
+                    case 'credit-card':
+                        targetPage = 'Pago/pagina_credito.html';
+                        break;
+                    case 'new-debit':
+                        targetPage = 'Pago/pagina_debito.html';
+                        break;
+                    case 'transfer':
+                        targetPage = 'Pago/pagina_PayPal.html';
+                        break;
+                    case 'cash':
+                        targetPage = 'Pago/pagina_efectivo.html';
+                        break;
+                    default:
+                        targetPage = 'error.html'; // En caso de que no haya coincidencias
+                }
+
+                // Agregar los parámetros de nombre y precio a la URL de destino
+                window.location.href = `${targetPage}?nombre=${encodeURIComponent(nombre)}&precio=${encodeURIComponent(precio)}`;
+            } else {
+                alert('Por favor selecciona un método de pago.');
+            }
+        });
+    </script>
+
+</body>
+</html>
