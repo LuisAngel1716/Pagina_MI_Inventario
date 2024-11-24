@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay with PayPal</title>
+    <link rel="webside icon" type="png" href="../logo1.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .container img {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+
+        .container h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .container p {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #0070ba;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #005a9c;
+        }
+
+        .link {
+            font-size: 0.9rem;
+            color: #0070ba;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: #ccc;
+        }
+
+        .separator span {
+            margin: 0 10px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        .footer a {
+            color: #0070ba;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal Logo">
+        <h1>Paga con PayPal</h1>
+        <p>Ingrese su correo para iniciar.</p>
+        <form>
+            <div class="form-group">
+                <input type="email" placeholder="Email o numero de teléfono" required>
+            </div>
+            <button type="submit" class="btn">Siguente</button>
+        </form>
+        <a href="#" class="link">¿Olvidaste el correo electrónico?</a>
+        <div class="separator">
+            <span>o</span>
+        </div>
+        <button class="btn" style="background-color: #f5f5f5; color: #333; border: 1px solid #ccc;">Crear una cuenta</button>
+        <div class="footer">
+            <p><a href="#">Cancelar y regresar a Pagos</a></p>
+            <p>
+                <img src="https://flagcdn.com/w40/mx.png" alt="Mexican flag" style="width: 20px; vertical-align: middle;"> 
+                <a href="#">Español</a> | <a href="#">English</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
