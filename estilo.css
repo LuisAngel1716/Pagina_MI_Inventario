@@ -943,6 +943,13 @@
             height: auto;
             display: block;
         }
+        /******************* DISEÑO RESPONSIVO ***************/
+        /* Cambios para pantallas más pequeñas */
+        @media (max-width: 768px) {
+            #contact h2 {
+                font-size: 2rem;
+            }
+        }
 
 
     </style>
